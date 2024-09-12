@@ -27,14 +27,18 @@ function App() {
     const frequentLetter = mostFrequentLetter(userMessage);
     const reversedText = reverseText(userMessage);
     const jumbledWords = jumbleWords(userMessage);
+    const uppercaseText = toUppercase(userMessage);
+    const lowercaseText = toLowercase(userMessage);
 
     // Create a combined response
     const responseText = `
-      Word Count: ${wordCount}
+      Word Count: ${wordCount}\n
       Vowel and Consonant Count: ${vowelConsonantCount}
       Most Frequent Letter: ${frequentLetter}
       Reversed Text: ${reversedText}
       Jumbled Words: ${jumbledWords}
+      Uppercase Text: ${uppercaseText}
+      Lowercase Text: ${lowercaseText}
     `;
 
     return { sender: 'bot', text: responseText };
@@ -58,6 +62,8 @@ function App() {
   };
   const reverseText = (text) => text.split('').reverse().join('');
   const jumbleWords = (text) => text.split(' ').map(word => word.split('').sort(() => Math.random() - 0.5).join('')).join(' ');
+  const toUppercase = (text) => text.toUpperCase();
+  const toLowercase = (text) => text.toLowerCase();
 
   return (
     <div className="App">
