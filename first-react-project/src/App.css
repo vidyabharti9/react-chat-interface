@@ -6,7 +6,8 @@
 }
 
 body {
-  background-color: #2f3136;
+  /* background-image: url('/border_frame.jpg'); */
+  background-color: #f17171f5;
   display: flex;
   justify-content: center;
   align-items: center;
