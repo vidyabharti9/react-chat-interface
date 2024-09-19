@@ -1,15 +1,18 @@
 // src/utils/transformations.js
+// Function to count the number of words in the given text
 export const countWords = (text) => text.split(' ').filter(word => word !== '').length;
 
+// Function to count the number of vowels and consonants in the given text
 export const countVowelsAndConsonants = (text) => {
   const vowels = text.match(/[aeiou]/gi) || [];
   const consonants = text.match(/[bcdfghjklmnpqrstvwxyz]/gi) || [];
   return `Vowels: ${vowels.length}, Consonants: ${consonants.length}`;
 };
 
+// Function to find the most frequent letter in the text
 export const mostFrequentLetter = (text) => {
   const frequency = {};
-  text.replace(/[^a-zA-Z]/g, '').split('').forEach(char => {
+  text.replace(/[^a-zA-Z]/g, '').split('').forEach(char => { // Remove non-alphabetic characters
     char = char.toLowerCase();
     frequency[char] = (frequency[char] || 0) + 1;
   });

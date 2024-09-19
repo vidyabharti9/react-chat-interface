@@ -5,17 +5,23 @@ import { generateBotResponse } from './utils/botResponses';
 import './App.css';
 
 function App() {
+  // State to hold chat messages, initialized as an empty array
   const [messages, setMessages] = useState([]);
+  // State to handle the current theme mode (dark mode by default)
   const [isDarkMode, setIsDarkMode] = useState(true);
 
+  // Function to handle when the user sends a message
   const handleSendMessage = (userMessage) => {
+    // Create a new message object with sender as 'user' and the text as userMessage
     const newMessage = { sender: 'user', text: userMessage };
+    // Update the messages state to include the new user message
     setMessages((prevMessages) => [...prevMessages, newMessage]);
 
     setTimeout(() => {
       const botMessage = generateBotResponse(userMessage);
+      // Update the messages state to include the bot's response
       setMessages((prevMessages) => [...prevMessages, botMessage]);
-    }, 1000);
+    }, 900);
   };
 
   const toggleTheme = () => {
@@ -32,7 +38,7 @@ function App() {
       <h1 className="chat-title">
         Chat with the bot
       </h1>
-
+      {/* Chat Window Component where messages are displayed and input is taken */}
       <ChatWindow messages={messages} onSendMessage={handleSendMessage} />
     </div>
   );

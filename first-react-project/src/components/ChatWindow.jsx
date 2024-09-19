@@ -20,7 +20,7 @@ function ChatWindow({ messages, onSendMessage }) {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleSendClick();
+      handleSendClick(); // Call the send function when Enter is pressed
     }
   };
 
@@ -37,6 +37,7 @@ function ChatWindow({ messages, onSendMessage }) {
   return (
     <div className="chat-window">
       <div className="message-container">
+        {/* Render each message by mapping over the 'messages' array */}
         {messages.map((msg, index) => (
           <Message key={index} sender={msg.sender} text={msg.text} />
         ))}
