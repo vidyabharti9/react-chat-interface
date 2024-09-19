@@ -4,15 +4,19 @@ export const countWords = (text) => text.split(' ').filter(word => word !== '').
 
 // Function to count the number of vowels and consonants in the given text
 export const countVowelsAndConsonants = (text) => {
+  // Match all vowels (case-insensitive) and consonants in the text
   const vowels = text.match(/[aeiou]/gi) || [];
   const consonants = text.match(/[bcdfghjklmnpqrstvwxyz]/gi) || [];
+
+  // Return the count of vowels and consonants in the format "Vowels: X, Consonants: Y"
   return `Vowels: ${vowels.length}, Consonants: ${consonants.length}`;
 };
 
-// Function to find the most frequent letter in the text
 export const mostFrequentLetter = (text) => {
   const frequency = {};
-  text.replace(/[^a-zA-Z]/g, '').split('').forEach(char => { // Remove non-alphabetic characters
+
+  // Remove non-alphabet characters, convert to lowercase, and split into an array of characters
+  text.replace(/[^a-zA-Z]/g, '').split('').forEach(char => {
     char = char.toLowerCase();
     frequency[char] = (frequency[char] || 0) + 1;
   });
@@ -20,6 +24,7 @@ export const mostFrequentLetter = (text) => {
   return `${maxFreqChar} (${frequency[maxFreqChar]})`;
 };
 
+//func for various transformation.
 export const reverseText = (text) => text.split('').reverse().join('');
 export const jumbleWords = (text) => text.split(' ').map(word => word.split('').sort(() => Math.random() - 0.5).join('')).join(' ');
 export const toUppercase = (text) => text.toUpperCase();

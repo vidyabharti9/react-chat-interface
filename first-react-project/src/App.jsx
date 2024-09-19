@@ -1,44 +1,31 @@
-// src/App.jsx
+// src/App.js
 import React, { useState } from 'react';
 import ChatWindow from './components/ChatWindow';
+import Sidebar from './components/Sidebar';
 import { generateBotResponse } from './utils/botResponses';
 import './App.css';
 
 function App() {
-  // State to hold chat messages, initialized as an empty array
-  const [messages, setMessages] = useState([]);
-  // State to handle the current theme mode (dark mode by default)
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  // Initialize state to store chat messages, starting with a bot's greeting message
+  const [messages, setMessages] = useState([
+    { sender: 'bot', text: 'Hi Golu Bot here!. Give me any kind of message, I will make amazing transformations for you!' },]);
 
-  // Function to handle when the user sends a message
-  const handleSendMessage = (userMessage) => {
-    // Create a new message object with sender as 'user' and the text as userMessage
-    const newMessage = { sender: 'user', text: userMessage };
-    // Update the messages state to include the new user message
-    setMessages((prevMessages) => [...prevMessages, newMessage]);
-
+  // Function to handle sending messages
+  const handleSendMessage = (messageText) => {
+    const userMessage = { sender: 'user', text: messageText };
+    setMessages((prevMessages) => [...prevMessages, userMessage]); // Add only user message first
+  
+    const botResponse = generateBotResponse(messageText);
+    
+    // Simulate a small delay before adding the bot's response (for realism)
     setTimeout(() => {
-      const botMessage = generateBotResponse(userMessage);
-      // Update the messages state to include the bot's response
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-    }, 900);
+      setMessages((prevMessages) => [...prevMessages, botResponse]); // Add bot response after user message
+    }, 900); 
   };
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
+  
   return (
-    <div className={`App ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
-      {/* Theme Switch */}
-      <div className="theme-switch" onClick={toggleTheme}>
-        <input type="checkbox" checked={!isDarkMode} readOnly />
-        <span className="slider"></span>
-      </div>
-      <h1 className="chat-title">
-        Chat with the bot
-      </h1>
-      {/* Chat Window Component where messages are displayed and input is taken */}
+    <div className="app-container">
+      <Sidebar />
       <ChatWindow messages={messages} onSendMessage={handleSendMessage} />
     </div>
   );

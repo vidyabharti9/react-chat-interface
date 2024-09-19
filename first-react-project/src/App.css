@@ -1,233 +1,168 @@
-* {
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
-body {
-  background-image: url('/border_frame.jpg'); 
-  background-color: #f17171f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.App {
-  width: 80vw;
-  max-width: 1200px;
-  height: 80vh;
-  background-color: #36393f;
-  border-radius: 8px;
   overflow: hidden;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-right: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-  padding-top: 60px; /* Added padding for the title */
 }
 
-/* Title at the top */
-.chat-title {
-  position: absolute;
-  top: 10px;
-  width: 100%;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffffff; /* Default color for dark theme */
-  transition: color 0.3s ease;
+.user-list,
+.group-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-list li,
+.group-list li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.toggle-container {
+  margin-top: auto;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 .chat-window {
   flex-grow: 1;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+}
+
+.message-container {
+  flex-grow: 1;
   padding: 10px;
-  color: #dcddde;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .message {
-  margin-bottom: 12px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  max-width: 75%;
-  line-height: 1.4;
-  word-wrap: break-word;
-  position: relative;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 60%;
 }
 
 .message.user {
-  background-color: #7289da;
-  color: white;
-  align-self: flex-end;
+  background-color: #e0ffe0;
+  align-self: flex-end; /* Align user messages to the right */
 }
 
 .message.bot {
-  background-color: #f7f8ef;
-  color: #070707;
-  align-self: flex-start;
+  background-color: #f0f0f0;
+  align-self: flex-start; /* Align bot messages to the left */
 }
 
 .input-container {
   display: flex;
-  padding: 15px;
-  background-color: #40444b;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: #f9f9f9;
 }
 
-input[type="text"] {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  margin-right: 10px;
-  background-color: #2f3136;
-  color: #dcddde;
-  outline: none;
-  font-size: 16px;
+.input-container input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-button {
-  padding: 12px 16px;
-  background-color: #7289da;
+.input-container button {
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.dark-mode {
+  background-color: #333;
   color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
 }
 
-button:hover {
-  background-color: #5b6eae;
+.dark-mode .sidebar {
+  background-color: #222;
 }
 
-.chat-window::-webkit-scrollbar {
-  width: 8px;
+.dark-mode .chat-window {
+  background-color: #444;
 }
 
-.chat-window::-webkit-scrollbar-thumb {
-  background-color: #4f545c;
-  border-radius: 3px;
-}
-
-.light-theme {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.dark-theme {
-  background-color: #2f3136;
-  color: #dcddde;
-}
-
-/* Adjust the message bubbles */
-.message.user {
-  background-color: #7289da;
-}
-
-.message.bot {
-  background-color: #f7f8ef;
-}
-
-/* Responsive layout */
-@media (max-width: 768px) {
-  .App {
-    width: 95vw;
-    height: 90vh;
-  }
-
-  input[type="text"] {
-    font-size: 14px;
-  }
-
-  button {
-    font-size: 14px;
-  }
-}
-
-/* Theme Switch button */
-.theme-switch-btn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  padding: 8px 14px;
-  background-color: #7289da;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.theme-switch-btn:hover {
-  background-color: #5b6eae;
-}
-
-/* Light theme changes */
-.light-theme .chat-title {
-  color: #333333; /* Dark color for light theme */
-}
-
-.light-theme .theme-switch-btn {
-  background-color: #555555;
-}
-
-.light-theme .message.bot{
-  background-color: white;
+.light-mode {
+  background-color: #f4f4f4;
   color: black;
 }
 
-.dark-theme  .message.bot{
-  background-color: black;
-  color: white;
+/* Dark mode message styles */
+.dark-mode .message.bot {
+  background-color: #222;
 }
 
-.light-theme .message.user{
-  background-color: rgba(3, 40, 49, 0.799);
-  color: rgba(246, 246, 246, 0.881);
+.dark-mode .message.user {
+  background-color: #444;
 }
 
-.dark-theme  .message.user{
-  background-color: rgba(17, 7, 47, 0.491);
-  color: white;
-}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Full width on smaller screens */
+    border-right: none; /* Remove border */
+  }
 
-:root {
-  --light-background: #f0f0f0;
-  --light-text: #333;
-  --dark-background: #2f3136;
-  --dark-text: #dcddde;
-  --switch-bg: #28292c;
-  --switch-light: #d8dbe0;
-}
+  .chat-window {
+    height: calc(100vh - 60px); /* Adjust height */
+  }
 
-/* Switch styling */
-.theme-switch {
-  position: relative;
-  width: 80px;
-  height: 40px;
-  background-color: var(--switch-bg);
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-bottom: 10px;
-}
+  .input-container {
+    flex-direction: column; /* Stack input and button */
+  }
 
-.theme-switch input {
-  display: none;
-}
+  .input-container input {
+    width: 100%; /* Full width input field */
+    margin-bottom: 10px; /* Spacing between input and button */
+  }
 
-.slider {
-  position: absolute;
-  top: 5px;
-  left: 10px;
-  width: 30px;
-  height: 30px;
-  background-color: var(--switch-light);
-  border-radius: 50%;
-  transition: all 0.4s ease;
-}
+  .message-container {
+    padding: 10px; /* Padding for message container */
+    overflow-y: auto; /* Allow scrolling */
+  }
 
-input:checked + .slider {
-  transform: translateX(40px);
-  background-color: wheat;
+  .message {
+    max-width: 80%; /* Limit width for messages */
+  }
 }

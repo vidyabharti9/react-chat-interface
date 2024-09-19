@@ -1,35 +1,33 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Message from './Message';
-
 function ChatWindow({ messages, onSendMessage }) {
   const [inputText, setInputText] = useState('');
-  
-  // Ref for the message container to enable auto-scrolling
-  const messageEndRef = useRef(null);
+  const messageEndRef = useRef(null); // Reference for scrolling to the bottom of the message list
 
+  // Handle changes in the input field
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
   const handleSendClick = () => {
-    if (inputText.trim() !== '') {
-      onSendMessage(inputText);
-      setInputText('');
+    if (inputText.trim() !== '') { // Ensure input is not just whitespace
+      onSendMessage(inputText); // Call the parent function to handle message sending
+      setInputText(''); // Clear the input after sending
     }
   };
 
+  // Handle pressing the Enter key for sending messages
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleSendClick(); // Call the send function when Enter is pressed
+      handleSendClick();
     }
   };
 
-  // Function to scroll to the bottom of the messages container
   const scrollToBottom = () => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Scroll to bottom whenever messages are updated
+  // Effect to scroll to the bottom whenever messages change
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -37,11 +35,9 @@ function ChatWindow({ messages, onSendMessage }) {
   return (
     <div className="chat-window">
       <div className="message-container">
-        {/* Render each message by mapping over the 'messages' array */}
         {messages.map((msg, index) => (
           <Message key={index} sender={msg.sender} text={msg.text} />
         ))}
-        {/* Empty div to act as a reference for auto-scrolling */}
         <div ref={messageEndRef} />
       </div>
       <div className="input-container">
