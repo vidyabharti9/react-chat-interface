@@ -27,6 +27,9 @@ function App() {
       <button onClick={toggleTheme}>
         Switch to {isDarkMode ? 'Light' : 'Dark'} Theme
       </button>
+      <h1 className="chat-title">
+        Chat with the bot
+      </h1>
 
       <ChatWindow messages={messages} onSendMessage={handleSendMessage} />
     </div>
