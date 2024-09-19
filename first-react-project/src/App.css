@@ -6,7 +6,7 @@
 }
 
 body {
-  /* background-image: url('/border_frame.jpg'); */
+  background-image: url('/border_frame.jpg'); 
   background-color: #f17171f5;
   display: flex;
   justify-content: center;
@@ -169,4 +169,65 @@ button:hover {
 
 .light-theme .theme-switch-btn {
   background-color: #555555;
+}
+
+.light-theme .message.bot{
+  background-color: white;
+  color: black;
+}
+
+.dark-theme  .message.bot{
+  background-color: black;
+  color: white;
+}
+
+.light-theme .message.user{
+  background-color: rgba(3, 40, 49, 0.799);
+  color: rgba(246, 246, 246, 0.881);
+}
+
+.dark-theme  .message.user{
+  background-color: rgba(17, 7, 47, 0.491);
+  color: white;
+}
+
+:root {
+  --light-background: #f0f0f0;
+  --light-text: #333;
+  --dark-background: #2f3136;
+  --dark-text: #dcddde;
+  --switch-bg: #28292c;
+  --switch-light: #d8dbe0;
+}
+
+/* Switch styling */
+.theme-switch {
+  position: relative;
+  width: 80px;
+  height: 40px;
+  background-color: var(--switch-bg);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 10px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--switch-light);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+}
+
+input:checked + .slider {
+  transform: translateX(40px);
+  background-color: wheat;
 }

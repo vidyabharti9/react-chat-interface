@@ -24,9 +24,11 @@ function App() {
 
   return (
     <div className={`App ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
-      <button onClick={toggleTheme}>
-        Switch to {isDarkMode ? 'Light' : 'Dark'} Theme
-      </button>
+      {/* Theme Switch */}
+      <div className="theme-switch" onClick={toggleTheme}>
+        <input type="checkbox" checked={!isDarkMode} readOnly />
+        <span className="slider"></span>
+      </div>
       <h1 className="chat-title">
         Chat with the bot
       </h1>
